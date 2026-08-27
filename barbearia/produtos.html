@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camisetas e bonés — Barbearia Thiago Coelho</title>
+  <meta name="description" content="Barbearia Thiago Coelho em Sumaré-SP: corte de cabelo, barba, navalha e agendamento online.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" data-nav>
+      <img src="assets/favicon.png" alt="Logo da Barbearia Thiago Coelho">
+      <span>Thiago Coelho</span>
+    </a>
+    <nav class="desktop-nav">
+      <a href="index.html" data-nav>Início</a>
+      <a href="servicos.html" data-nav>Serviços</a>
+      <a href="produtos.html" data-nav>Produtos</a>
+      <a href="agendar.html" data-nav>Agendar</a>
+      <a href="contato.html" data-nav>Contato</a>
+    </nav>
+    <a class="btn btn-outline desktop-book" href="agendar.html" data-nav>Agendar</a>
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html" data-nav>Início</a>
+    <a href="servicos.html" data-nav>Serviços</a>
+    <a href="produtos.html" data-nav>Produtos</a>
+    <a href="agendar.html" data-nav>Agendar</a>
+    <a href="contato.html" data-nav>Contato</a>
+  </nav>
+</header>
+
+<main class="page">
+
+<div class="container">
+  <section class="page-top">
+    <p class="eyebrow">Loja</p>
+    <h1>Camisetas e bonés</h1>
+    <p>Produtos oficiais da barbearia. A reserva é feita direto com a gente e a retirada é na loja.</p>
+  </section>
+  <div id="productsList" class="product-grid"><p class="loading">Carregando produtos...</p></div>
+</div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/produtos.js"></script>
+</body>
+</html>
