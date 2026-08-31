@@ -15,8 +15,7 @@
 - `js/barbearia.js`
 - `js/supabase.js`
 - `supabase/migration.sql`
-- `assets/favicon.png` (adicione aqui a logo original)
-
+- `assets/favicon.png` 
 
 
 
