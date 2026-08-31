@@ -36,15 +36,24 @@
   </nav>
 </header>
 
-
 <main class="page booking-page">
   <div class="container booking-container">
     <section class="booking-top">
       <h1>Agendar</h1>
-      <p>Confirmamos seu horário por telefone. R. Geraldo Preto Rodrigues, 396 - Jardim Paulistano, Sumaré - SP, 13174-571</p>
+      <p>Escolha seu serviço, data e horário. R. Geraldo Preto Rodrigues, 396 - Jardim Paulistano, Sumaré - SP, 13174-571</p>
     </section>
 
-    <form id="bookingForm" class="booking-form">
+    <section id="clientBookingProfile" class="client-booking-profile" hidden>
+      <div>
+        <p class="eyebrow">Sua conta</p>
+        <h2 id="clientBookingName">Cliente</h2>
+        <p id="clientBookingPhone" class="client-booking-phone"></p>
+      </div>
+      <button id="clientLogoutButton" class="btn btn-outline client-logout-button" type="button">Sair</button>
+    </section>
+
+
+    <form id="bookingForm" class="booking-form" hidden>
       <div class="booking-field">
         <label for="servico">Serviço</label>
         <select id="servico" class="booking-input"></select>
@@ -58,18 +67,6 @@
       <div class="booking-field">
         <label>Horário</label>
         <div id="timeGrid" class="booking-time-grid"></div>
-      </div>
-
-      <div class="booking-two-columns">
-        <div class="booking-field">
-          <label for="nome">Nome</label>
-          <input id="nome" class="booking-input" placeholder="Seu nome" autocomplete="name">
-        </div>
-
-        <div class="booking-field">
-          <label for="telefone">Telefone</label>
-          <input id="telefone" class="booking-input" placeholder="(19) 90000-0000" autocomplete="tel">
-        </div>
       </div>
 
       <div class="booking-field">

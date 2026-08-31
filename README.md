@@ -176,3 +176,40 @@ O painel agora funciona em duas áreas principais:
      - aparece imediatamente na Agenda do dia correspondente.
 
 Também existe uma área de cancelados da data selecionada.
+
+
+## WhatsApp via Python + Meta Cloud API
+
+A integração de teste com Twilio foi removida. O painel privado agora possui uma área **Campanha no WhatsApp**, com os campos **Nome da mensagem** e **Descrição**.
+
+O envio é feito por um backend Flask em `backend/app.py`, usando a API oficial do WhatsApp da Meta. O backend valida a sessão do barbeiro no Supabase e envia somente para clientes que deram autorização para promoções no cadastro. A tela de agendamento não exibe mais um botão para ativar/desativar promoções.
+
+Veja o passo a passo completo em `PYTHON-WHATSAPP.md`.
+
+## Login de clientes por WhatsApp + senha
+
+A página de agendamento agora exige autenticação do cliente.
+
+Fluxo:
+
+`Agendar -> cliente-login.html -> WhatsApp + senha -> Supabase Auth -> agendar.html`
+
+Arquivos adicionados/alterados:
+
+- `cliente-login.html` — entrar e criar conta;
+- `js/cliente-login.js` — autenticação visual por WhatsApp + senha, usando um e-mail técnico interno no Supabase Auth;
+- `agendar.html` — não pede mais nome e telefone em todo agendamento;
+- `js/agendar.js` — exige sessão e usa o perfil do cliente;
+- `supabase/clientes-auth.sql` — tabela `customers`, vínculo com `bookings` e função segura de agendamento.
+
+### Para ativar no Supabase
+
+1. Execute primeiro `supabase/barbeiro-admin.sql` se ainda não tiver feito isso.
+2. Execute `supabase/clientes-auth.sql` no SQL Editor.
+3. Em **Authentication > Sign In / Providers**, deixe **Email** ativado e **Phone** desativado.
+4. No provedor Email, desative **Confirm email** para este fluxo.
+5. O cliente continua vendo apenas WhatsApp + senha; o e-mail é um identificador técnico interno gerado pelo JavaScript. Não é necessário Twilio/SMS para login.
+
+A senha não é armazenada na tabela `customers`: ela fica protegida no Supabase Auth.
+
+A tabela `customers` mantém um único cadastro por usuário/telefone e os novos agendamentos recebem `customer_id`, permitindo histórico do cliente sem duplicar cadastros.

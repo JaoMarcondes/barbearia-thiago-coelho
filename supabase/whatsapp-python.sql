@@ -1,0 +1,7 @@
+-- Arquivo mantido apenas para compatibilidade com a versão anterior do projeto.
+-- A estrutura atual de clientes, autorização de WhatsApp e login por telefone
+-- está consolidada em:
+--
+--   supabase/clientes-auth.sql
+--
+-- Execute clientes-auth.sql no SQL Editor do Supabase.

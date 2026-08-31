@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar para agendar — Barbearia Thiago Coelho</title>
+  <meta name="description" content="Entre ou crie sua conta com seu WhatsApp para agendar na Barbearia Thiago Coelho.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" data-nav>
+      <img src="assets/favicon.png" alt="Logo da Barbearia Thiago Coelho">
+      <span>Thiago Coelho</span>
+    </a>
+    <nav class="desktop-nav">
+      <a href="index.html" data-nav>Início</a>
+      <a href="servicos.html" data-nav>Serviços</a>
+      <a href="produtos.html" data-nav>Produtos</a>
+      <a href="agendar.html" data-nav>Agendar</a>
+      <a href="contato.html" data-nav>Contato</a>
+    </nav>
+    <a class="btn btn-outline desktop-book" href="agendar.html" data-nav>Agendar</a>
+    <button class="menu-button" id="menuButton" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="index.html" data-nav>Início</a>
+    <a href="servicos.html" data-nav>Serviços</a>
+    <a href="produtos.html" data-nav>Produtos</a>
+    <a href="agendar.html" data-nav>Agendar</a>
+    <a href="contato.html" data-nav>Contato</a>
+  </nav>
+</header>
+
+<main class="page client-auth-page">
+  <div class="container client-auth-container">
+    <section class="client-auth-intro">
+      <p class="eyebrow">Área do cliente</p>
+      <h1>Entre para agendar</h1>
+      <p>Seu WhatsApp funciona como seu usuário. Depois de entrar, você não precisa preencher nome e telefone toda vez que fizer um agendamento.</p>
+    </section>
+
+    <section class="client-auth-card">
+      <div class="client-auth-tabs" role="tablist" aria-label="Entrar ou criar conta">
+        <button id="clientLoginTab" class="client-auth-tab active" type="button" role="tab" aria-selected="true">Entrar</button>
+        <button id="clientRegisterTab" class="client-auth-tab" type="button" role="tab" aria-selected="false">Criar conta</button>
+      </div>
+
+      <form id="clientLoginForm" class="client-auth-form">
+        <div class="booking-field">
+          <label for="clientLoginPhone">WhatsApp</label>
+          <input id="clientLoginPhone" class="booking-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 90000-0000" required>
+        </div>
+        <div class="booking-field">
+          <label for="clientLoginPassword">Senha</label>
+          <input id="clientLoginPassword" class="booking-input" type="password" autocomplete="current-password" minlength="6" placeholder="Sua senha" required>
+        </div>
+        <p id="clientLoginStatus" class="status" hidden></p>
+        <button id="clientLoginButton" class="btn btn-gold client-auth-submit" type="submit">Entrar e agendar</button>
+      </form>
+
+      <form id="clientRegisterForm" class="client-auth-form" hidden>
+        <div class="booking-field">
+          <label for="clientRegisterName">Nome</label>
+          <input id="clientRegisterName" class="booking-input" type="text" autocomplete="name" maxlength="80" placeholder="Seu nome" required>
+        </div>
+        <div class="booking-field">
+          <label for="clientRegisterPhone">WhatsApp</label>
+          <input id="clientRegisterPhone" class="booking-input" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 90000-0000" required>
+          <small class="client-auth-hint">Esse número será usado para entrar na sua conta. Não enviamos SMS para fazer login.</small>
+        </div>
+        <div class="booking-field">
+          <label for="clientRegisterPassword">Crie uma senha</label>
+          <input id="clientRegisterPassword" class="booking-input" type="password" autocomplete="new-password" minlength="6" placeholder="Mínimo de 6 caracteres" required>
+        </div>
+        <div class="booking-field">
+          <label for="clientRegisterPasswordConfirm">Confirme a senha</label>
+          <input id="clientRegisterPasswordConfirm" class="booking-input" type="password" autocomplete="new-password" minlength="6" placeholder="Repita a senha" required>
+        </div>
+
+        <label class="booking-consent" for="clientWhatsappOptIn">
+          <input id="clientWhatsappOptIn" type="checkbox">
+          <span>Quero receber promoções e novidades da barbearia pelo WhatsApp. Posso cancelar essa autorização depois.</span>
+        </label>
+
+        <p id="clientRegisterStatus" class="status" hidden></p>
+        <button id="clientRegisterButton" class="btn btn-gold client-auth-submit" type="submit">Criar conta</button>
+      </form>
+
+    </section>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script type="module" src="js/cliente-login.js"></script>
+</body>
+</html>

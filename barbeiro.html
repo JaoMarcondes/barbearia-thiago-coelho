@@ -95,6 +95,50 @@
         </div>
       </section>
 
+      <section class="staff-panel whatsapp-campaign-panel">
+        <div class="staff-section-head">
+          <div>
+            <p class="eyebrow">Relacionamento com clientes</p>
+            <h2>Campanha no WhatsApp</h2>
+          </div>
+          <span class="staff-section-note">Envia pelo WhatsApp oficial somente para clientes que autorizaram promoções.</span>
+        </div>
+
+        <form id="whatsappCampaignForm" class="whatsapp-campaign-form">
+          <div class="whatsapp-campaign-grid">
+            <div>
+              <label for="whatsappCampaignTitle">Nome da mensagem</label>
+              <input
+                id="whatsappCampaignTitle"
+                class="booking-input"
+                type="text"
+                maxlength="60"
+                placeholder="Ex.: Promoção de sexta-feira"
+                required>
+            </div>
+
+            <div>
+              <label for="whatsappCampaignDescription">Descrição</label>
+              <textarea
+                id="whatsappCampaignDescription"
+                class="booking-input booking-textarea"
+                rows="4"
+                maxlength="500"
+                placeholder="Ex.: Corte + barba com condição especial hoje."
+                required></textarea>
+            </div>
+          </div>
+
+          <p class="whatsapp-campaign-help">
+            O Python usa um template de Marketing aprovado na Meta com duas variáveis: nome da mensagem e descrição.
+            Clientes sem autorização de WhatsApp não entram no envio.
+          </p>
+
+          <p id="whatsappCampaignStatus" class="status" hidden></p>
+          <button id="whatsappCampaignButton" class="btn btn-gold" type="submit">Enviar campanha</button>
+        </form>
+      </section>
+
     </div>
   </main>
 

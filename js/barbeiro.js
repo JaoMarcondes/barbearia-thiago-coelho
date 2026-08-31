@@ -1,4 +1,5 @@
 import { supabase } from "./supabase.js";
+import { PYTHON_API_URL } from "./config.js";
 
 const pendingList = document.querySelector("#pendingBookingsList");
 const confirmedList = document.querySelector("#confirmedBookingsList");
@@ -311,4 +312,83 @@ function escapeHtml(value) {
     '"': "&quot;",
     "'": "&#039;"
   }[char]));
+}
+
+
+// =========================================================
+// CAMPANHA WHATSAPP VIA BACKEND PYTHON + META CLOUD API
+// =========================================================
+const whatsappCampaignForm = document.querySelector("#whatsappCampaignForm");
+const whatsappCampaignTitle = document.querySelector("#whatsappCampaignTitle");
+const whatsappCampaignDescription = document.querySelector("#whatsappCampaignDescription");
+const whatsappCampaignStatus = document.querySelector("#whatsappCampaignStatus");
+const whatsappCampaignButton = document.querySelector("#whatsappCampaignButton");
+
+if (whatsappCampaignForm) {
+  whatsappCampaignForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const title = whatsappCampaignTitle.value.trim();
+    const description = whatsappCampaignDescription.value.trim();
+
+    if (!title || !description) {
+      setWhatsappCampaignStatus("Preencha o nome da mensagem e a descrição.", false);
+      return;
+    }
+
+    const confirmed = window.confirm(
+      "Enviar esta campanha para todos os clientes que autorizaram receber promoções no WhatsApp?"
+    );
+    if (!confirmed) return;
+
+    whatsappCampaignButton.disabled = true;
+    whatsappCampaignButton.textContent = "Enviando...";
+    whatsappCampaignStatus.hidden = true;
+
+    try {
+      const { data: { session: currentSession } } = await supabase.auth.getSession();
+      if (!currentSession?.access_token) {
+        throw new Error("Sua sessão expirou. Entre novamente no painel.");
+      }
+
+      const response = await fetch(`${PYTHON_API_URL}/api/whatsapp/promocao`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${currentSession.access_token}`
+        },
+        body: JSON.stringify({ title, description })
+      });
+
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || "O backend Python recusou o envio.");
+      }
+
+      const message = result.failed
+        ? `Campanha concluída: ${result.sent} enviada(s) e ${result.failed} com falha.`
+        : `Campanha enviada para ${result.sent} cliente(s).`;
+
+      setWhatsappCampaignStatus(message, result.failed === 0);
+
+      if (result.failed === 0) {
+        whatsappCampaignForm.reset();
+      }
+    } catch (error) {
+      console.error(error);
+      setWhatsappCampaignStatus(
+        error?.message || "Não foi possível falar com o backend Python.",
+        false
+      );
+    } finally {
+      whatsappCampaignButton.disabled = false;
+      whatsappCampaignButton.textContent = "Enviar campanha";
+    }
+  });
+}
+
+function setWhatsappCampaignStatus(message, ok) {
+  whatsappCampaignStatus.hidden = false;
+  whatsappCampaignStatus.textContent = message;
+  whatsappCampaignStatus.className = `status ${ok ? "ok" : "error"}`;
 }
